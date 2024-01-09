@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          target: runtime
+          #target: runtime
           push: true
           tags: raynkami/rust.dev:v0.0.1
           labels: rust.ldap
