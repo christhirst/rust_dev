@@ -24,6 +24,5 @@ RUN cargo install cargo-modules
 RUN cargo install cargo-audit
 
 # Src import
-RUN mkdir /code_snippets
-WORKDIR /code_snippets
-COPY ./code_snippets /code_snippets/
+RUN mkdir /workspace
+WORKDIR /workspace
