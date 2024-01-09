@@ -27,4 +27,4 @@ RUN cargo install cargo-audit
 RUN mkdir /workspace
 WORKDIR /workspace
 
-CMD ["whoami"]
+CMD ["/bin/bash"]
