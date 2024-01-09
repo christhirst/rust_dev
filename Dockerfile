@@ -12,7 +12,19 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get install -y \
     tree \
     xxd \
     git \
-    vim
+    vim \
+    openssh-server
+
+RUN mkdir /var/run/sshd
+
+RUN echo ‘root:YOUR_PASSWORD’ | chpasswd
+
+RUN sed -i ‘s/#PermitRootLogin prohibit-password/PermitRootLogin yes/’ /etc/ssh/sshd_config
+
+RUN sed ‘s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g’ -i /etc/pam.d/sshd
+
+EXPOSE 22
+
 
 # Rust tooling
 RUN rustup toolchain install nightly
@@ -27,4 +39,5 @@ RUN cargo install cargo-audit
 RUN mkdir /workspace
 WORKDIR /workspace
 
-CMD ["/usr/sbin/sshd", "-D", "-e"]
+CMD [“/usr/sbin/sshd”, “-D”]
+
