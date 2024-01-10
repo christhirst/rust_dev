@@ -33,7 +33,7 @@ jobs:
           context: .
           #target: runtime
           push: true
-          tags: raynkami/rust.dev:v0.0.1
+          tags: raynkami/rust.dev:v0.0.2
           labels: rust.ldap
 
   del_runs:
