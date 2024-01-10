@@ -39,6 +39,6 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 EXPOSE 22
-
+RUN ls - /usr/bin/sshd
 CMD [“/usr/sbin/sshd”, “-D”]
 
