@@ -1,5 +1,4 @@
-# x86_64
-FROM rust:slim-buster
+FROM rust:latest
 
 # Non-Rust tooling
 ENV TZ=US/New_York
@@ -27,9 +26,28 @@ RUN { \
     } > /usr/local/bin/entry_point.sh; \
     chmod +x /usr/local/bin/entry_point.sh;
 ENV ROOT_PASSWORD root
-RUN mkdir /var/run/sshd
-
-#RUN echo ‘root:PASS!wo#rd’ | chpasswd
+RUN env
+RUN echo $PATH
+ENV RUSTUP_HOME "/usr/local/rustup"
+# {
+#     "rust-analyzer.cargo.extraEnv": {
+#         "PATH": "/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+#         "RUSTUP_HOME": "/usr/local/rustup",
+#         "CARGO_HOME": "/usr/local/cargo",
+#         "RUSTFMT": "/usr/local/cargo/rustfmt",
+#         "CARGO": "/usr/local/cargo/bin/cargo",
+#         "RUSTC": "/usr/local/cargo/bin/rustc"
+#     },
+#     "rust-analyzer.runnables.extraEnv": {
+#         "PATH": "/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+#         "RUSTUP_HOME": "/usr/local/rustup",
+#         "CARGO_HOME": "/usr/local/cargo",
+#         "RUSTFMT": "/usr/local/cargo/rustfmt",
+#         "CARGO": "/usr/local/cargo/bin/cargo",
+#         "RUSTC": "/usr/local/cargo/bin/rustc"
+#     },
+#     "rust-analyzer.check.extraEnv": {}
+# }
 
 #RUN sed -i ‘s/#PermitRootLogin prohibit-password/PermitRootLogin yes/’ /etc/ssh/sshd_config
 
@@ -39,12 +57,15 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 
 # Rust tooling
 RUN rustup toolchain install nightly
-RUN rustup component add llvm-tools-preview
-RUN cargo install mdbook
-RUN cargo install cargo-fuzz
-RUN cargo install cargo-binutils
-RUN cargo install cargo-modules
-RUN cargo install cargo-audit
+RUN rustup default stable
+RUN rustup component add clippy
+RUN rustup component add rustfmt 
+#RUN rustup component add llvm-tools-preview
+#RUN cargo install mdbook
+#RUN cargo install cargo-fuzz
+#RUN cargo install cargo-binutils
+#RUN cargo install cargo-modules
+#RUN cargo install cargo-audit
 
 # Src import
 RUN mkdir /workspace
