@@ -1,5 +1,5 @@
 # x86_64
-FROM rust:1.75-slim
+FROM rust:slim-buster
 
 # Non-Rust tooling
 ENV TZ=US/New_York
@@ -22,9 +22,8 @@ RUN mkdir /var/run/sshd
 #RUN sed -i ‘s/#PermitRootLogin prohibit-password/PermitRootLogin yes/’ /etc/ssh/sshd_config
 
 #RUN sed ‘s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g’ -i /etc/pam.d/sshd
-
-EXPOSE 22
-
+RUN echo 'root:root123' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Rust tooling
 RUN rustup toolchain install nightly
@@ -38,6 +37,8 @@ RUN cargo install cargo-audit
 # Src import
 RUN mkdir /workspace
 WORKDIR /workspace
+
+EXPOSE 22
 
 CMD [“/usr/sbin/sshd”, “-D”]
 
