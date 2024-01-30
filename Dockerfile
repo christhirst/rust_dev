@@ -27,8 +27,11 @@ RUN { \
     chmod +x /usr/local/bin/entry_point.sh;
 ENV ROOT_PASSWORD root
 RUN env
+ENV PATH="$ {PATH}:/usr/local/rustup/toolchains/1.75.0-x86_64-unknown-linux-gnu/bin/"
+
 RUN echo $PATH
 ENV RUSTUP_HOME "/usr/local/rustup"
+# /root/.vscode-server/data/Machine/settings.json
 # {
 #     "rust-analyzer.cargo.extraEnv": {
 #         "PATH": "/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
