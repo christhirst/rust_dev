@@ -27,7 +27,7 @@ RUN { \
     chmod +x /usr/local/bin/entry_point.sh;
 ENV ROOT_PASSWORD root
 RUN env
-ENV PATH="$ {PATH}:/usr/local/rustup/toolchains/1.75.0-x86_64-unknown-linux-gnu/bin/"
+ENV PATH="${PATH}:/usr/local/rustup/toolchains/1.75.0-x86_64-unknown-linux-gnu/bin/"
 
 RUN echo $PATH
 ENV RUSTUP_HOME "/usr/local/rustup"
