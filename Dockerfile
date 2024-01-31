@@ -55,7 +55,7 @@ ENV RUSTUP_HOME "/usr/local/rustup"
 #RUN sed -i ‘s/#PermitRootLogin prohibit-password/PermitRootLogin yes/’ /etc/ssh/sshd_config
 
 #RUN sed ‘s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g’ -i /etc/pam.d/sshd
-RUN echo 'root:root123' | chpasswd
+#RUN echo 'root:root123' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Rust tooling
