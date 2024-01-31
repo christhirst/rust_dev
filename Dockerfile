@@ -15,8 +15,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get install -y \
     vim \
     openssh-server
 
-#RUN sed -i 's/^#\(PermitRootLogin\) .*/\1 yes/' /etc/ssh/sshd_config
-#RUN sed -i 's/^\(UsePAM yes\)/# \1/' /etc/ssh/sshd_config
+RUN sed -i 's/^#\(PermitRootLogin\) .*/\1 yes/' /etc/ssh/sshd_config
+RUN sed -i 's/^\(UsePAM yes\)/# \1/' /etc/ssh/sshd_config
 # entrypoint
 RUN { \
     echo '#!/bin/bash -eu'; \
