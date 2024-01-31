@@ -1,4 +1,4 @@
-FROM rust:latest
+FROM rust:bookworm
 
 # Non-Rust tooling
 ENV TZ=US/New_York
