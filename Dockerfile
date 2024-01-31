@@ -1,4 +1,4 @@
-FROM rust:bookworm
+FROM rust:1-slim-bookworm
 
 # Non-Rust tooling
 ENV TZ=US/New_York
